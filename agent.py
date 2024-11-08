@@ -10,7 +10,7 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-API_KEY = env("apikey")
+
 os.environ["OPENAI_API_TYPE"] = "azure"
 os.environ["OPENAI_API_BASE"] = "https://mucorpeuwmarai.openai.azure.com"
 os.environ["OPENAI_API_KEY"] = "637afdcad52d496393de84c349932f6b"
