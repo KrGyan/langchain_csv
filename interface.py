@@ -14,7 +14,8 @@ def decode_response(response: str) -> dict:
     Returns:
         dict: dictionary with response data
     """
-    return json.loads(response)
+    #st.write(response)
+    return response
 
 
 def write_response(response_dict: dict):
@@ -69,7 +70,9 @@ if st.button("Submit Query", type="primary"):
     response = query_agent(agent=agent, query=query)
 
     # Decode the response.
+    st.write(response)
     decoded_response = decode_response(response)
+    
 
     # Write the response to the Streamlit app.
     write_response(decoded_response)
