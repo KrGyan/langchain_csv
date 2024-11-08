@@ -1,6 +1,8 @@
-from langchain import OpenAI
+from langchain.llms import AzureOpenAI
 from langchain.agents import create_pandas_dataframe_agent
 import pandas as pd
+import os
+import streamlit as st
 
 # Setting up the api key
 import environ
@@ -9,6 +11,11 @@ env = environ.Env()
 environ.Env.read_env()
 
 API_KEY = env("apikey")
+os.environ["OPENAI_API_TYPE"] = "azure"
+os.environ["OPENAI_API_BASE"] = "https://mucorpeuwmarai.openai.azure.com"
+os.environ["OPENAI_API_KEY"] = "637afdcad52d496393de84c349932f6b"
+os.environ["OPENAI_API_VERSION"] = "2023-03-15-preview"
+openai_model="gpt-35-turbo"
 
 
 def create_agent(filename: str):
@@ -23,7 +30,7 @@ def create_agent(filename: str):
     """
 
     # Create an OpenAI object.
-    llm = OpenAI(openai_api_key=API_KEY)
+    llm = AzureOpenAI( deployment_name="gpt-35-turbo",model_name=openai_model, temperature=0, streaming=True)
 
     # Read the CSV file into a Pandas DataFrame.
     df = pd.read_csv(filename)
